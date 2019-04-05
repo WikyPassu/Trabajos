@@ -12,7 +12,7 @@ void mostrarMenu(int est_x, int est_y, float x, float y);
 
 
 
-/** \brief              Le pide al usuario el ingreso de una opcion (1-5). Dentro se evaluara cada caso.
+/** \brief              Le pide al usuario el ingreso de una opcion (1-5), luego evaluara y realizara diferentes operaciones de acuerdo a cada caso.
  *
  * \return void         No devuelve nada.
  *
