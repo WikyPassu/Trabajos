@@ -1,0 +1,76 @@
+# depslib dependency file v1.0
+1553610925 source:c:\users\alumno\desktop\tp1\calculos.c
+	<stdio.h>
+	<stdlib.h>
+	"Menu.h"
+
+1553613144 c:\users\alumno\desktop\tp1\menu.h
+
+1553612849 source:c:\users\alumno\desktop\tp1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Menu.h"
+
+1553908850 source:c:\users\alan_\desktop\programacion-laboratorio\programacion-laboratorio\tp1\calculos.c
+	<stdio.h>
+	<stdlib.h>
+	"Menu.h"
+
+1553910496 c:\users\alan_\desktop\programacion-laboratorio\programacion-laboratorio\tp1\menu.h
+
+1553909339 source:c:\users\alan_\desktop\programacion-laboratorio\programacion-laboratorio\tp1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Menu.h"
+
+1553913767 source:c:\users\alan_\desktop\programacion-laboratorio\programacion-laboratorio\tp1\menu.c
+	<stdio.h>
+	<stdlib.h>
+	"Menu.h"
+
+1554321754 source:c:\users\alan_\desktop\tp1\calculos.c
+	<stdio.h>
+	<stdlib.h>
+	"Menu.h"
+	"Calculos.h"
+
+1554428753 c:\users\alan_\desktop\tp1\menu.h
+
+1554318956 source:c:\users\alan_\desktop\tp1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Menu.h"
+	"Calculos.h"
+
+1554429459 source:c:\users\alan_\desktop\tp1\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"Menu.h"
+	"Calculos.h"
+
+1554321754 source:c:\users\alan_\desktop\tp1 - copy\calculos.c
+	<stdio.h>
+	<stdlib.h>
+	"Menu.h"
+	"Calculos.h"
+
+1554428753 c:\users\alan_\desktop\tp1 - copy\menu.h
+
+1554318956 source:c:\users\alan_\desktop\tp1 - copy\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Menu.h"
+	"Calculos.h"
+
+1554429459 source:c:\users\alan_\desktop\tp1 - copy\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"Menu.h"
+	"Calculos.h"
+
+1554428931 c:\users\alan_\desktop\tp1 - copy\calculos.h
+
+1554428931 c:\users\alan_\desktop\tp1\calculos.h
+
