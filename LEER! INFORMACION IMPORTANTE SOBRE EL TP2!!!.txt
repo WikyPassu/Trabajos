@@ -1,0 +1,17 @@
+Cometi el error de crear un repositorio llamado tp_laboratorio_2 para cargarle adentro el TP2 y de
+volver a darme de alta en el campus cuando en realidad debia guardar todos los TPs que vaya haciendo
+en mi repositorio tp_laboratorio_1
+
+El TP2 fue subido en tiempo y forma en el siguiente repositorio:
+
+https://github.com/WikyPassu/tp_laboratorio_2
+
+Acabo de agregar este mismo TP2 en el siguiente repositorio (el original donde tambien esta el TP1):
+
+https://github.com/WikyPassu/tp_laboratorio_1
+
+Si es posible, me gustaria que mi TP2 sea corregido normalmente y que el enlace anterior sea el unico 
+correspondiente a donde se encuentran mis TPs. Se puede verificar que el trabajo fue entregado en 
+tiempo y forma si accede a mi repositorio tp_laboratorio_2 y verifica la fecha del commit.
+
+Gracias.
