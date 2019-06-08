@@ -42,10 +42,7 @@ Employee* employee_newParameters(int id, char* nameStr, int hoursWorked, int sal
         employee_setHoursWorked(oneEmployee, hoursWorked);
         employee_setSalary(oneEmployee, salary);
     }
-    else
-    {
-        printf("\nError.\n");
-    }
+
     return oneEmployee;
 }
 
@@ -61,120 +58,104 @@ void employee_delete(Employee* this)
 int employee_setId(Employee* this, int id)
 {
     int valid = 0;
+
     if(this != NULL)
     {
         this->id = id;
         valid = 1;
     }
-    else
-    {
-        printf("\nError.\n");
-    }
+
     return valid;
 }
 
 int employee_getId(Employee* this, int* id)
 {
     int state = 0;
+
     if(this != NULL)
     {
         *id = this->id;
         state = 1;
     }
-    else
-    {
-        printf("Error.\n");
-    }
+
     return state;
 }
 
 int employee_setName(Employee* this, char* name)
 {
     int valid = 0;
+
     if(this != NULL)
     {
         strcpy(this->name, name);
         valid = 1;
     }
-    else
-    {
-        printf("Error.\n");
-    }
+
     return valid;
 }
 
 int employee_getName(Employee* this, char* name)
 {
     int state = 0;
+
     if(this != NULL)
     {
         strcpy(name, this->name);
         state = 1;
     }
-    else
-    {
-        printf("Error.\n");
-    }
+
     return state;
 }
 
 int employee_setHoursWorked(Employee* this, int hoursWorked)
 {
     int valid = 0;
+
     if(this != NULL)
     {
         this->hoursWorked = hoursWorked;
         valid = 1;
     }
-    else
-    {
-        printf("\nError.\n");
-    }
+
     return valid;
 }
 
 int employee_getHoursWorked(Employee* this, int* hoursWorked)
 {
     int state = 0;
+
     if(this != NULL)
     {
         *hoursWorked = this->hoursWorked;
         state = 1;
     }
-    else
-    {
-        printf("Error.\n");
-    }
+
     return state;
 }
 
 int employee_setSalary(Employee* this, int salary)
 {
     int valid = 0;
+
     if(this != NULL)
     {
         this->salary = salary;
         valid = 1;
     }
-    else
-    {
-        printf("Error.\n");
-    }
+
     return valid;
 }
 
 int employee_getSalary(Employee* this, int* salary)
 {
     int state = 0;
+
     if(this != NULL)
     {
         *salary = this->salary;
         state = 1;
     }
-    else
-    {
-        printf("Error.\n");
-    }
+
     return state;
 }
 
@@ -182,18 +163,20 @@ int employee_verifyCompliance(char* message)
 {
     int isSatisfied = 0;
     char answer; //Repuesta del usuario.
+
     getChar(&answer, message); //Le pido al usuario que ingrese una respuesta.
     if(answer == 's' || answer == 'S')
     {   //Si responde 's' o 'S', esta satisfecho.
         isSatisfied = 1;
     }
+
     return isSatisfied;
 }
 
-int employee_printOneEmployee(Employee* this)
+int employee_printOneEmployee(Employee* this, int format)
 {
     int state = 0, id, hoursWorked, salary;
-    char name[128];
+    char name[51];
 
     if(this != NULL)
     {
@@ -201,12 +184,17 @@ int employee_printOneEmployee(Employee* this)
         employee_getName(this, name);
         employee_getHoursWorked(this, &hoursWorked);
         employee_getSalary(this, &salary);
-        printf("\nID: %d | Nombre: %s | Horas trabajadas: %d | Salario: $%d\n\n", id, name, hoursWorked, salary);
+
+        if(format == 1)
+        {
+            printf("\nID: %d | Nombre: %s | Horas trabajadas: %d | Salario: $%d\n\n", id, name, hoursWorked, salary);
+        }
+        else
+        {
+            printf("%4d %15s %6d %8d\n", id, name, hoursWorked, salary);
+        }
+
         state = 1;
-    }
-    else
-    {
-        printf("\nError.\n");
     }
 
     return state;
@@ -236,6 +224,7 @@ int employee_verifyIfIsInList(LinkedList* this, int id)
 {
     Employee* auxEmployee;
     int i, index = -1;
+
     for(i=0; i<ll_len(this); i++)
     {
         auxEmployee = ll_get(this, i);
@@ -245,6 +234,7 @@ int employee_verifyIfIsInList(LinkedList* this, int id)
             break;
         }
     }
+
     return index;
 }
 
@@ -316,10 +306,10 @@ Employee* employee_get(LinkedList* this)
     if(index != -1)
     {
         rEmployee = ll_get(this, index);
-        employee_printOneEmployee(rEmployee);
+        employee_printOneEmployee(rEmployee, 1);
         if(employee_verifyCompliance("'s' si desea seleccionar al empleado para realizar modificaciones"))
         {
-            printf("\nSe ha seleccionado como objetivo de edicion al empleado.\n\n");
+            printf("\nSe ha seleccionado al empleado como objetivo de edicion.\n\n");
         }
         else
         {
@@ -338,12 +328,12 @@ void employee_modifyName(Employee* oneEmployee)
 {
     if(oneEmployee != NULL)
     {
-        char newName[128];
+        char newName[51];
 
         printf("Empleado seleccionado actualmente:\n");
-        employee_printOneEmployee(oneEmployee);
+        employee_printOneEmployee(oneEmployee, 1);
 
-        getValidString("nuevo nombre", newName, 128, 0);
+        getValidString("nuevo nombre", newName, 51, 0);
         printf("\n");
         if(employee_verifyCompliance("'s' si desea aplicar la modificacion"))
         {
@@ -368,7 +358,7 @@ void employee_modifyHW(Employee* oneEmployee)
         int newHW;
 
         printf("Empleado seleccionado actualmente:\n");
-        employee_printOneEmployee(oneEmployee);
+        employee_printOneEmployee(oneEmployee, 1);
 
         getValidInt(&newHW, "nueva cantidad de horas trabajadas", 1, 400, 0);
         printf("\n");
@@ -395,7 +385,7 @@ void employee_modifySalary(Employee* oneEmployee)
         int newSalary;
 
         printf("Empleado seleccionado actualmente:\n");
-        employee_printOneEmployee(oneEmployee);
+        employee_printOneEmployee(oneEmployee, 1);
 
         getValidInt(&newSalary, "nuevo salario", 1, 200000, 0);
         printf("\n");

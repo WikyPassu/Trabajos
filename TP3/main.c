@@ -19,8 +19,7 @@
     10. Salir
 ***********************************************************************************/
 
-///Estructura terminada, faltan validaciones en main.
-///Falta revisar todo y comentar.
+///Falta revisar todo, intentar separar librerias y comentar todo el codigo.
 
 int main()
 {
@@ -32,42 +31,96 @@ int main()
         switch(option)
         {
             case 1:
-                controller_loadFromText("data.csv", employeesList);
+                if(controller_loadFromText("data.csv", employeesList) == 0)
+                {
+                    printf("Error: No se pudo abrir/leer el archivo en formato texto.\n\n");
+                }
                 employeesCounter = ll_len(employeesList);
                 system("pause");
                 break;
             case 2:
-                controller_loadFromBinary("dataB.csv", employeesList);
+                if(controller_loadFromBinary("dataB.csv", employeesList) == 0)
+                {
+                    printf("Error: No se pudo abrir/leer el archivo en formato binario.\n\n");
+                }
                 employeesCounter = ll_len(employeesList);
                 system("pause");
                 break;
             case 3:
-                controller_addEmployee(employeesList);
+                if(controller_addEmployee(employeesList) == 0)
+                {
+                    printf("Error: No se pudo realizar la carga de un empleado al sistema.\n\n");
+                }
                 employeesCounter = ll_len(employeesList);
                 system("pause");
                 break;
             case 4:
-                controller_editEmployee(employeesList);
+                if(employeesCounter > 0)
+                {
+                    if(controller_editEmployee(employeesList) == 0)
+                    {
+                        printf("Error: No se pudo ingresar al menu de modificaciones.\n\n");
+                    }
+                }
+                else
+                {
+                    printf("Error: No hay empleados cargados en el sistema.\n\n");
+                    system("pause");
+                }
                 break;
             case 5:
-                controller_removeEmployee(employeesList);
-                employeesCounter = ll_len(employeesList);
+                if(employeesCounter > 0)
+                {
+                    if(controller_removeEmployee(employeesList) == 0)
+                    {
+                        printf("Error: No se pudo ingresar al menu de eliminacion.\n\n");
+                    }
+                    employeesCounter = ll_len(employeesList);
+                }
+                else
+                {
+                    printf("Error: No hay empleados cargados en el sistema.\n\n");
+                }
                 system("pause");
                 break;
             case 6:
-                printf("Empleados en el sistema: %d\n\n", employeesCounter);
-                controller_ListEmployee(employeesList);
+                if(employeesCounter > 0)
+                {
+                    printf("Empleados en el sistema: %d\n\n", employeesCounter);
+                    controller_ListEmployee(employeesList);
+                }
+                else
+                {
+                    printf("Error: No hay empleados cargados en el sistema.\n\n");
+                }
                 system("pause");
                 break;
             case 7:
-                controller_sortEmployee(employeesList);
+                if(employeesCounter > 0)
+                {
+                    if(controller_sortEmployee(employeesList) == 0)
+                    {
+                        printf("Error: No se puedo ingresar al menu de ordenamiento.\n\n");
+                    }
+                }
+                else
+                {
+                    printf("Error: No hay empleados cargados en el sistema.\n\n");
+                    system("pause");
+                }
                 break;
             case 8:
-                controller_saveAsText("data.csv", employeesList);
+                if(controller_saveAsText("data.csv", employeesList) == 0)
+                {
+                    printf("Error: No se pudo crear el archivo en formato texto.\n\n");
+                }
                 system("pause");
                 break;
             case 9:
-                controller_saveAsBinary("dataB.csv", employeesList);
+                if(controller_saveAsBinary("dataB.csv", employeesList) == 0)
+                {
+                    printf("Error: No se pudo crear el archivo en formato binario.\n\n");
+                }
                 system("pause");
                 break;
             case 10:

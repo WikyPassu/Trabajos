@@ -3,7 +3,7 @@
 typedef struct
 {
     int id;
-    char name[128];
+    char name[51];
     int hoursWorked;
     int salary;
 }Employee;
@@ -27,7 +27,7 @@ int employee_getSalary(Employee* this, int* salary);
 int employee_showMenu(int* pOption, char* message, int low, int high);
 int employee_verifyCompliance(char* message);
 
-int employee_printOneEmployee(Employee* this);
+int employee_printOneEmployee(Employee* this, int format);
 void employee_verifyAndAddToList(LinkedList* this, Employee* oneEmployee, int* counter);
 int employee_verifyIfIsInList(LinkedList* this, int id);
 Employee* employee_get(LinkedList* this);

@@ -15,7 +15,7 @@
 int parser_EmployeeFromText(FILE* pFile, LinkedList* pArrayListEmployee)
 {
     int state = 0, counter = 0;
-    char id[500], name[500], hoursWorked[500], salary[500];
+    char id[10], name[51], hoursWorked[10], salary[20];
 
     if(pFile != NULL && pArrayListEmployee != NULL)
     {
@@ -31,10 +31,6 @@ int parser_EmployeeFromText(FILE* pFile, LinkedList* pArrayListEmployee)
         fclose(pFile);
         state = 1;
         printf("Empleados cargados al sistema con exito: %d\n\n", counter);
-    }
-    else
-    {
-        printf("\nError.\n");
     }
 
     return state;
@@ -69,10 +65,6 @@ int parser_EmployeeFromBinary(FILE* pFile, LinkedList* pArrayListEmployee)
         fclose(pFile);
         state = 1;
         printf("Empleados cargados al sistema con exito: %d\n\n", counter);
-    }
-    else
-    {
-        printf("\nError.\n");
     }
 
     return state;
