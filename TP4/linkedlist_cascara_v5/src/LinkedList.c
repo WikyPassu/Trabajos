@@ -428,7 +428,24 @@ void* ll_pop(LinkedList* this, int index)
 */
 int ll_contains(LinkedList* this, void* pElement)
 {
-    int returnAux = -1;
+    int i, returnAux = -1;
+
+    Node* pNode = NULL; ///Creo un nodo a NULL
+
+    if(this != NULL) ///Evaluo que la lista no sea NULL
+    {
+        returnAux = 0; ///Retorno 0 en caso de que uno de los elementos no exista en this
+
+        for(i=0; i<ll_len(this); i++) ///Con un bucle for, voy recorriendo la lista
+        {
+            pNode = getNode(this, i); ///Con getNode() obtengo el nodo en el indice del iterador i
+            if(pNode->pElement == pElement) ///Evaluo sui el pElement de dicho nodo es igual a el pElement a encontrar coincidencia
+            {
+                returnAux = 1; ///Si existe coindidencia, retorno 1
+                break; ///Hago break
+            }
+        }
+    }
 
     return returnAux;
 }
@@ -444,7 +461,23 @@ int ll_contains(LinkedList* this, void* pElement)
 */
 int ll_containsAll(LinkedList* this, LinkedList* this2)
 {
-    int returnAux = -1;
+    int i, returnAux = -1;
+
+    int* pAuxElement = NULL; ///Creo un puntero aux del elemento a NULL
+
+    if(this != NULL && this2 != NULL) ///Verifico que ambas listas no sean NULL
+    {
+        returnAux = 1; ///Retorno 1 en caso de que todos los elementos esten en la lista
+
+        for(i=0; i<ll_len(this2); i++) ///Con un bucle for recorro la lista 2
+        {
+            pAuxElement = ll_get(this2, i); ///Guardo en aux el elemento del nodo cuyo index es el iterador i
+            if(ll_contains(this, pAuxElement) == 0) ///Evaluo con ll_contains() si dicho elemento se encuentra en la lista 1
+            {
+                returnAux = 0; ///Cambio el retorno a 0
+            }
+        }
+    }
 
     return returnAux;
 }
@@ -463,7 +496,25 @@ LinkedList* ll_subList(LinkedList* this, int from, int to)
 {
     LinkedList* cloneArray = NULL;
 
-    return cloneArray;
+    int i;
+
+    Node* pNode = NULL; ///Creo un nodo a NULL
+
+    if(this != NULL) ///Evaluo que la lista no sea NULL
+    {
+        if(from >= 0 && from <= ll_len(this) && to >= from && to <= ll_len(this)) ///Verifico que los parametros de rango sean correctos
+        {
+            cloneArray = ll_newLinkedList(); ///Si esta todo bien, creo una nueva lista
+
+            for(i=from; i<to; i++) ///Con un bucle for recorro los nodos de ese rango
+            {
+                pNode = getNode(this, i); ///Obtengo el nodo en el index del iterador i
+                addNode(cloneArray, i, pNode->pElement); ///Agrego ese nodo a la nueva lista en ese index y con el mismo elemento
+            }
+        }
+    }
+
+    return cloneArray; ///Retorno la nueva lista
 }
 
 
@@ -478,7 +529,12 @@ LinkedList* ll_clone(LinkedList* this)
 {
     LinkedList* cloneArray = NULL;
 
-    return cloneArray;
+    if(this != NULL) ///Evaluo que la lista no sea NULL
+    {
+        cloneArray = ll_subList(this, 0, ll_len(this)); ///Utilizo subList() para pasar todos los nodos de una lista a la otra
+    }
+
+    return cloneArray; ///Devuelvo la nueva lista clonada
 }
 
 
@@ -486,14 +542,53 @@ LinkedList* ll_clone(LinkedList* this)
  * \param pList LinkedList* Puntero a la lista
  * \param pFunc (*pFunc) Puntero a la funcion criterio
  * \param order int  [1] Indica orden ascendente - [0] Indica orden descendente
- * \return int Retorna  (-1) Error: si el puntero a la listas es NULL
+ * \return int Retorna  (-1) Error: si el puntero a la lista es NULL
                                 ( 0) Si ok
  */
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 {
-    int returnAux =-1;
+    int i, j, returnAux =-1;
+
+    void* pE1 = NULL; ///Creo puntero a void de los elementos de la funcion y un auxiliar para hacer las permutaciones
+    void* pE2 = NULL;
+    void* pAux = NULL;
+
+    if(this != NULL && pFunc != NULL && (order == 0 || order == 1)) ///Evaluo que la lista y la direccion de la funcion no sean NULL, y verifico que el order sea 0 o 1
+    {
+        for(i=0; i<ll_len(this)-1; i++) ///Utilizo 2 for para hacer ordenamiento por burbujeo
+        {
+            pE1 = ll_get(this, i); ///Obtengo el pElement del nodo en el indice del iterador i
+
+            for(j=i+1; j<ll_len(this); j++) ///Segundo bucle for
+            {
+                pE2 = ll_get(this, j); ///Obtengo el pElement del nodo en el indice del iterador j
+
+                if(order == 1) ///Orden ascendente
+                {
+                    if((*pFunc)(pE1, pE2) == 1) ///Si el primero es mayor al segundo
+                    {
+                        pAux = pE1; ///Voy permutando los punteros a los elementos
+                        pE1 = pE2;
+                        pE2 = pAux;
+                    }
+                }
+                else if(order == 0) ///Orden descendente
+                {
+                    if((*pFunc)(pE1, pE2) == -1) ///Si el primero es menor al segundo
+                    {
+                        pAux = pE2; ///Voy permutando los punteros a los elementos
+                        pE2 = pE1;
+                        pE1 = pAux;
+                    }
+                }
+                ///Con ll_set() modifico los pElement de los punteros en el indice del iterador correspondiente
+                ll_set(this, i, pE1);
+                ll_set(this, j, pE2);
+            }
+            returnAux = 0; ///Retorno 0, pues se pudo realizar el ordenamiento
+        }
+    }
 
     return returnAux;
-
 }
 
