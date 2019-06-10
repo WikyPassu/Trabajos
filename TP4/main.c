@@ -110,16 +110,30 @@ int main()
                 }
                 break;
             case 8:
-                if(controller_saveAsText("data.csv", employeesList) == 0)
+                if(employeesCounter > 0)
                 {
-                    printf("Error: No se pudo crear el archivo en formato texto.\n\n");
+                    if(controller_saveAsText("data.csv", employeesList) == 0)
+                    {
+                        printf("Error: No se pudo crear el archivo en formato texto.\n\n");
+                    }
+                }
+                else
+                {
+                    printf("Error: No hay empleados cargados en el sistema.\n\n");
                 }
                 system("pause");
                 break;
             case 9:
-                if(controller_saveAsBinary("dataB.csv", employeesList) == 0)
+                if(employeesCounter > 0)
                 {
-                    printf("Error: No se pudo crear el archivo en formato binario.\n\n");
+                    if(controller_saveAsBinary("dataB.csv", employeesList) == 0)
+                    {
+                        printf("Error: No se pudo crear el archivo en formato texto.\n\n");
+                    }
+                }
+                else
+                {
+                    printf("Error: No hay empleados cargados en el sistema.\n\n");
                 }
                 system("pause");
                 break;

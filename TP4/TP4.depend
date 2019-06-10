@@ -1,0 +1,80 @@
+# depslib dependency file v1.0
+1560173852 source:c:\users\alan_\desktop\tp4\controller.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<windows.h>
+	"Inputs.h"
+	"stringFormat.h"
+	"Utilities.h"
+	"LinkedList.h"
+	"Employee.h"
+	"parser.h"
+
+1560173852 c:\users\alan_\desktop\tp4\inputs.h
+
+1560173852 c:\users\alan_\desktop\tp4\stringformat.h
+
+1560173852 c:\users\alan_\desktop\tp4\utilities.h
+
+1532345152 c:\users\alan_\desktop\tp4\linkedlist.h
+
+1560173852 c:\users\alan_\desktop\tp4\employee.h
+
+1560173852 c:\users\alan_\desktop\tp4\parser.h
+
+1560173852 source:c:\users\alan_\desktop\tp4\employee.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+	"Inputs.h"
+	"stringFormat.h"
+	"Utilities.h"
+	"Employee.h"
+	"Controller.h"
+
+1560173852 c:\users\alan_\desktop\tp4\controller.h
+
+1560173852 source:c:\users\alan_\desktop\tp4\inputs.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"Inputs.h"
+	"Utilities.h"
+	"stringFormat.h"
+
+1560177114 source:c:\users\alan_\desktop\tp4\linkedlist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+
+1560173852 source:c:\users\alan_\desktop\tp4\parser.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<windows.h>
+	"LinkedList.h"
+	"Employee.h"
+
+1560173852 source:c:\users\alan_\desktop\tp4\stringformat.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"Inputs.h"
+	"Utilities.h"
+	"stringFormat.h"
+
+1560173852 source:c:\users\alan_\desktop\tp4\utilities.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<time.h>
+	"Inputs.h"
+	"Utilities.h"
+	"stringFormat.h"
+
