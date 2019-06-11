@@ -67,7 +67,8 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
     if(pArrayListEmployee != NULL)
     {
         printf("Ingresando datos del empleado...\n\n");
-        id = getRandomNumber(1001, 5000, 1);
+        //id = getRandomNumber(1001, 5000, 1);
+        employee_loadLastId(&id);
         getValidString("nombre", name, 51, 0);
         getValidInt(&hoursWorked, "horas trabajadas", 1, 400, 0);
         getValidInt(&salary, "salario", 1, 200000, 0);
@@ -79,6 +80,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
         {
             ll_add(pArrayListEmployee, newEmployee);
             state = 1;
+            employee_saveLastId(&id);
             printf("\nSe dio de alta al empleado exitosamente.\n\n");
         }
         else

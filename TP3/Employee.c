@@ -404,3 +404,29 @@ void employee_modifySalary(Employee* oneEmployee)
         printf("Error: Primero debe seleccionar un empleado.\n\n");
     }
 }
+
+void employee_loadLastId(int* lastId)
+{
+    FILE* pFile = NULL;
+
+    pFile = fopen("lastId.csv", "rb");
+
+    if(pFile != NULL)
+    {
+        fread(lastId, sizeof(int), 1, pFile);
+        fclose(pFile);
+    }
+}
+
+void employee_saveLastId(int* lastId)
+{
+    FILE* pFile = NULL;
+
+    pFile = fopen("lastId.csv", "wb");
+
+    if(pFile != NULL)
+    {
+        fwrite(lastId, sizeof(int), 1, pFile);
+        fclose(pFile);
+    }
+}
