@@ -20,10 +20,11 @@
 ***********************************************************************************/
 
 ///Falta revisar todo, intentar separar librerias y comentar todo el codigo.
+///Falta hacer ID incremental. Contador de ID pasado al controller de addEmployee.
 
 int main()
 {
-    int option, employeesCounter = 0;
+    int option, employeesCounter = 0, flag = 0;
     LinkedList* employeesList = ll_newLinkedList();
     do
     {
@@ -35,6 +36,10 @@ int main()
                 {
                     printf("Error: No se pudo abrir/leer el archivo en formato texto.\n\n");
                 }
+                else
+                {
+                    flag = 1;
+                }
                 employeesCounter = ll_len(employeesList);
                 system("pause");
                 break;
@@ -43,15 +48,26 @@ int main()
                 {
                     printf("Error: No se pudo abrir/leer el archivo en formato binario.\n\n");
                 }
+                else
+                {
+                    flag = 1;
+                }
                 employeesCounter = ll_len(employeesList);
                 system("pause");
                 break;
             case 3:
-                if(controller_addEmployee(employeesList) == 0)
+                if(flag == 1)
                 {
-                    printf("Error: No se pudo realizar la carga de un empleado al sistema.\n\n");
+                    if(controller_addEmployee(employeesList) == 0)
+                    {
+                        printf("Error: No se pudo realizar la carga de un empleado al sistema.\n\n");
+                    }
+                    employeesCounter = ll_len(employeesList);
                 }
-                employeesCounter = ll_len(employeesList);
+                else
+                {
+                    printf("Error: Antes de ingresar empleados se debe cargar un archivo.\n\n");
+                }
                 system("pause");
                 break;
             case 4:
