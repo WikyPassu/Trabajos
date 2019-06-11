@@ -41,4 +41,7 @@ void employee_modifyName(Employee* oneEmployee);
 void employee_modifyHW(Employee* oneEmployee);
 void employee_modifySalary(Employee* oneEmployee);
 
+void employee_loadLastId(int* lastId);
+void employee_saveLastId(int* lastId);
+
 #endif // employee_H_INCLUDED
