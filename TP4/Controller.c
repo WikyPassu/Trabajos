@@ -12,9 +12,9 @@
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param path char* Ruta del archivo
+ * \param pArrayListEmployee LinkedList* Lista de empleados
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
  *
  */
 int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
@@ -33,9 +33,9 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param path char* Ruta del archivo
+ * \param pArrayListEmployee LinkedList* Lista de empleados
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
  *
  */
 int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
@@ -54,9 +54,9 @@ int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
 
 /** \brief Alta de empleados
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pArrayListEmployee LinkedList* Lista de empleados
+ * \param lastId int* Ultimo id
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien, 2 si se cancelo la carga del empleado
  *
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee, int* lastId)
@@ -65,7 +65,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee, int* lastId)
     char name[51];
 
     if(pArrayListEmployee != NULL)
-    {
+    {   ///Obtengo datos del empleado
         printf("Ingresando datos del empleado...\n\n");
         getValidString("nombre", name, 51, 0);
         getValidInt(&hoursWorked, "horas trabajadas", 1, 400, 0);
@@ -74,7 +74,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee, int* lastId)
         Employee* newEmployee = employee_newParameters(*lastId, name, hoursWorked, salary);
         employee_printOneEmployee(newEmployee, 1);
 
-        if(employee_verifyCompliance("'s' si desea dar de alta al empleado"))
+        if(employee_verifyCompliance("'s' si desea dar de alta al empleado")) ///Verifico si el usuario esta de acuerdo con el alta
         {
             ll_add(pArrayListEmployee, newEmployee);
             state = 1;
@@ -93,9 +93,8 @@ int controller_addEmployee(LinkedList* pArrayListEmployee, int* lastId)
 
 /** \brief Modificar datos de empleado
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pArrayListEmployee LinkedList* Lista de empleados
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
  *
  */
 int controller_editEmployee(LinkedList* pArrayListEmployee)
@@ -111,7 +110,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
             switch(option)
             {
                 case 1:
-                    currentEmployee = employee_get(pArrayListEmployee);
+                    currentEmployee = employee_get(pArrayListEmployee); ///Para poder modificar datos primero se tiene que elegir a un empleado
                     system("pause");
                     break;
                 case 2:
@@ -138,9 +137,8 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 
 /** \brief Listar empleados
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pArrayListEmployee LinkedList* Lista de empleados
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
  *
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
@@ -158,7 +156,7 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
         printf("\n--------------------------------------\n");
         for(i=0; i<ll_len(pArrayListEmployee); i++)
         {
-            if(i%250 == 0)
+            if(i%250 == 0) ///Los voy mostrando de a 250. Comentar este if si se desea que se impriman todos sin tener que presionar tecla para continuar
             {
                 system("pause");
             }
@@ -174,14 +172,13 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 
 /** \brief Baja de empleado
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+* \param pArrayListEmployee LinkedList* Lista de empleados
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien, 2 si se cancelo la baja del empleado
  *
  */
 int controller_removeEmployee(LinkedList* pArrayListEmployee)
 {
-    int state = 0, toRemove, index;
+    int state = 0, toRemove, index; ///toRemove guarda el id del empleado a eliminar
     Employee* employeeToRemove;
 
     if(pArrayListEmployee != NULL)
@@ -189,14 +186,14 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
         controller_ListEmployee(pArrayListEmployee);
         getValidInt(&toRemove, "ID del empleado a eliminar del sistema", 1, 5000, 0);
 
-        index = employee_verifyIfIsInList(pArrayListEmployee, toRemove);
+        index = employee_verifyIfIsInList(pArrayListEmployee, toRemove); ///Verifico que exista el empleado con ese id y retorno su index
 
-        if(index != -1)
+        if(index != -1) ///Si existe
         {
             employeeToRemove = ll_get(pArrayListEmployee, index);
             employee_printOneEmployee(employeeToRemove, 1);
 
-            if(employee_verifyCompliance("'s' si desea eliminar al empleado del sistema"))
+            if(employee_verifyCompliance("'s' si desea eliminar al empleado del sistema")) ///Pregunto si el usuario quiere eliminar al empleado
             {
                 ll_remove(pArrayListEmployee, index);
                 printf("\nEmpleado eliminado del sistema con exito.\n\n");
@@ -220,9 +217,8 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 
 /** \brief Ordenar empleados
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+* \param pArrayListEmployee LinkedList* Lista de empleados
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
  *
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
@@ -343,14 +339,14 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param path char* Ruta del archivo
+ * \param pArrayListEmployee LinkedList* Lista de empleados
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
  *
  */
 int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
 {
-    int i, state = 1;
+    int i, state = 0;
     FILE* pFile = fopen(path, "w");
     Employee* oneEmployee;
 
@@ -358,9 +354,9 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
     {
         printf("Creando y escribiendo archivo (modo texto)...\n\n");
         Sleep(800);
-        fprintf(pFile, "id,nombre,horasTrabajadas,sueldo\n");
+        fprintf(pFile, "id,nombre,horasTrabajadas,sueldo\n"); ///Escribo las descripciones
         for(i=0; i<ll_len(pArrayListEmployee); i++)
-        {
+        {   ///Recorro la lista, voy obteniendo los empleados, los voy escribiendo en el archivo
             oneEmployee = ll_get(pArrayListEmployee, i);
             fprintf(pFile, "%d,%s,%d,%d\n", oneEmployee->id, oneEmployee->name, oneEmployee->hoursWorked, oneEmployee->salary);
 
@@ -375,9 +371,9 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+  * \param path char* Ruta del archivo
+ * \param pArrayListEmployee LinkedList* Lista de empleados
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
  *
  */
 int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
@@ -391,7 +387,7 @@ int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
         printf("Creando y escribiendo archivo (modo binario)...\n\n");
         Sleep(800);
         for(i=0; i<ll_len(pArrayListEmployee); i++)
-        {
+        {   ///Recorro la lista, voy obteniendo los empleados, los voy escribiendo en el archivo
             oneEmployee = ll_get(pArrayListEmployee, i);
             fwrite(oneEmployee, sizeof(Employee), 1, pFile);
         }

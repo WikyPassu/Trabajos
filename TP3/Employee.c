@@ -8,6 +8,15 @@
 #include "Employee.h"
 #include "Controller.h"
 
+/** \brief Crea y muestra un menu de opciones
+ *
+ * \param pOption int* Direccion de memoria de la opcion
+ * \param message char* Menu
+ * \param low int Opcion minima
+ * \param high int Opcion maxima
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
+ *
+ */
 int employee_showMenu(int* pOption, char* message, int low, int high)
 {
     int state = 0;
@@ -18,12 +27,17 @@ int employee_showMenu(int* pOption, char* message, int low, int high)
         printf("--------------------------------------------------------------\n");
         printf("%s", message);
         printf("\n--------------------------------------------------------------\n\n");
-        getValidInt(pOption, "una opcion", low, high, 0); //Pido un entero valido con rango.
+        getValidInt(pOption, "una opcion", low, high, 0); ///Pido un entero valido con rango.
         printf("\n");
     }
     return state;
 }
 
+/** \brief Reserva espacio en memoria para un empleado
+ *
+ * \return Employee* Devuelve un puntero a ese empleado
+ *
+ */
 Employee* employee_new()
 {
     Employee* oneEmployee;
@@ -31,6 +45,15 @@ Employee* employee_new()
     return oneEmployee;
 }
 
+/** \brief Carga datos a un empleado
+ *
+ * \param id int Legajo
+ * \param nameStr char* Nombre
+ * \param hoursWorked int Horas trabajadas
+ * \param salary int Salario
+ * \return Employee* Devuelve un puntero al empleado
+ *
+ */
 Employee* employee_newParameters(int id, char* nameStr, int hoursWorked, int salary)
 {
     Employee* oneEmployee;
@@ -46,6 +69,12 @@ Employee* employee_newParameters(int id, char* nameStr, int hoursWorked, int sal
     return oneEmployee;
 }
 
+/** \brief Hace free de un empleado
+ *
+ * \param this Employee* Direccion de un empleado
+ * \return void
+ *
+ */
 void employee_delete(Employee* this)
 {
     if(this != NULL)
@@ -55,6 +84,13 @@ void employee_delete(Employee* this)
     }
 }
 
+/** \brief Setea el legajo a un empleado
+ *
+ * \param this Employee* Direccion de un empleado
+ * \param id int Legajo
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
+ *
+ */
 int employee_setId(Employee* this, int id)
 {
     int valid = 0;
@@ -68,6 +104,13 @@ int employee_setId(Employee* this, int id)
     return valid;
 }
 
+/** \brief Obtiene el legajo de un empleado
+ *
+ * \param this Employee* Direccion de un empleado
+ * \param id int* Direccion de la variable donde se guardara el legajo
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
+ *
+ */
 int employee_getId(Employee* this, int* id)
 {
     int state = 0;
@@ -81,6 +124,13 @@ int employee_getId(Employee* this, int* id)
     return state;
 }
 
+/** \brief Setea el nombre a un empleado
+ *
+ * \param this Employee* Direccion de un empleado
+ * \param name char* Direccion del nombre
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
+ *
+ */
 int employee_setName(Employee* this, char* name)
 {
     int valid = 0;
@@ -94,6 +144,13 @@ int employee_setName(Employee* this, char* name)
     return valid;
 }
 
+/** \brief Obtiene el nombre de un empleado
+ *
+ * \param this Employee* La direccion de un empleado
+ * \param name char* La direccion de la bvariable donde se guardara el nombre
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
+ *
+ */
 int employee_getName(Employee* this, char* name)
 {
     int state = 0;
@@ -107,6 +164,13 @@ int employee_getName(Employee* this, char* name)
     return state;
 }
 
+/** \brief Setea las horas trabajadas a un empleado
+ *
+ * \param this Employee* La direccion de un empleado
+ * \param hoursWorked int Las horas trabajadas
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
+ *
+ */
 int employee_setHoursWorked(Employee* this, int hoursWorked)
 {
     int valid = 0;
@@ -120,6 +184,13 @@ int employee_setHoursWorked(Employee* this, int hoursWorked)
     return valid;
 }
 
+/** \brief Obtiene las horas trabajadas de un empleado
+ *
+ * \param this Employee* La direccion de un empleado
+ * \param hoursWorked int* La direccion donde se guardaran las horas trabajadas
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
+ *
+ */
 int employee_getHoursWorked(Employee* this, int* hoursWorked)
 {
     int state = 0;
@@ -133,6 +204,13 @@ int employee_getHoursWorked(Employee* this, int* hoursWorked)
     return state;
 }
 
+/** \brief Setea el salario a un empleado
+ *
+ * \param this Employee* La direccion del empleado
+ * \param salary int El salario
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
+ *
+ */
 int employee_setSalary(Employee* this, int salary)
 {
     int valid = 0;
@@ -146,6 +224,13 @@ int employee_setSalary(Employee* this, int salary)
     return valid;
 }
 
+/** \brief Obtiene el salario de un empleado
+ *
+ * \param this Employee* La direccion del empleado
+ * \param salary int* La direccion donde se guardara el salario
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
+ *
+ */
 int employee_getSalary(Employee* this, int* salary)
 {
     int state = 0;
@@ -159,20 +244,33 @@ int employee_getSalary(Employee* this, int* salary)
     return state;
 }
 
+/** \brief Verifica si el usuario esta satisfecho con lo que hizo
+ *
+ * \param message char* Pregunta
+ * \return int Devuelve un estado: 0 si esta insatisfecho, 1 si esta satisfecho
+ *
+ */
 int employee_verifyCompliance(char* message)
 {
     int isSatisfied = 0;
-    char answer; //Repuesta del usuario.
+    char answer; ///Repuesta del usuario.
 
-    getChar(&answer, message); //Le pido al usuario que ingrese una respuesta.
+    getChar(&answer, message); ///Le pido al usuario que ingrese una respuesta.
     if(answer == 's' || answer == 'S')
-    {   //Si responde 's' o 'S', esta satisfecho.
+    {   ///Si responde 's' o 'S', esta satisfecho.
         isSatisfied = 1;
     }
 
     return isSatisfied;
 }
 
+/** \brief Imprime un empleado en pantalla
+ *
+ * \param this Employee* Direccion de un empleado
+ * \param format int El formato de muestra: 0 para tabla, 1 para seleccion
+ * \return int Devuelve un estado: 0 si hubo error, 1 si esta todo bien
+ *
+ */
 int employee_printOneEmployee(Employee* this, int format)
 {
     int state = 0, id, hoursWorked, salary;
@@ -200,12 +298,20 @@ int employee_printOneEmployee(Employee* this, int format)
     return state;
 }
 
+/** \brief Verifica si existe un empleado en la lista y lo agrega a la misma si no es asi
+ *
+ * \param this LinkedList* La lista
+ * \param oneEmployee Employee* Direccion de un empleado
+ * \param counter int* Direccion a un contador de empleados
+ * \return void
+ *
+ */
 void employee_verifyAndAddToList(LinkedList* this, Employee* oneEmployee, int* counter)
 {
     Employee* auxEmployee;
     int i, flag = 0;
     for(i=0; i<ll_len(this); i++)
-    {
+    {   ///Recorro lista, obtengo empleado, verifico, agrego o no a la lista
         auxEmployee = ll_get(this, i);
         if(auxEmployee->id == oneEmployee->id)
         {
@@ -220,6 +326,13 @@ void employee_verifyAndAddToList(LinkedList* this, Employee* oneEmployee, int* c
     }
 }
 
+/** \brief Verifica si existe un empleado en la lista usando su id y devuelve el index en la lista si lo encuentra
+ *
+ * \param this LinkedList* La lista
+ * \param id int El legajo
+ * \return int Devuelve -1 si no existe el empleado, el index en la lista si existe
+ *
+ */
 int employee_verifyIfIsInList(LinkedList* this, int id)
 {
     Employee* auxEmployee;
@@ -238,6 +351,13 @@ int employee_verifyIfIsInList(LinkedList* this, int id)
     return index;
 }
 
+/** \brief Compara por legajos
+ *
+ * \param employeeOne void* Direccion de un empleado
+ * \param employeeTwo void* Direccion de otro empleado
+ * \return int Devuelve 1 o -1 de acuerdo al resultado de la comparacion
+ *
+ */
 int employee_compareById(void* employeeOne, void* employeeTwo)
 {
     int flag = -1;
@@ -251,6 +371,13 @@ int employee_compareById(void* employeeOne, void* employeeTwo)
     return flag;
 }
 
+/** \brief Compara por nombres
+ *
+ * \param employeeOne void* Direccion de un empleado
+ * \param employeeTwo void* Direccion de otro empleado
+ * \return int Devuelve -1, 0 o 1 de acuerdo al resultado de la comparacion
+ *
+ */
 int employee_compareByName(void* employeeOne, void* employeeTwo)
 {
     Employee* e1 = (Employee*)employeeOne;
@@ -258,6 +385,13 @@ int employee_compareByName(void* employeeOne, void* employeeTwo)
     return strcmp(e1->name, e2->name);
 }
 
+/** \brief Compara por horas trabajadas
+ *
+ * \param employeeOne void* Direccion de un empleado
+ * \param employeeTwo void* Direccion de otro empleado
+ * \return int Devuelve -1, 0 o 1 de acuerdo al resultado de la comparacion
+ *
+ */
 int employee_compareByHW(void* employeeOne, void* employeeTwo)
 {
     int flag = -1;
@@ -276,6 +410,13 @@ int employee_compareByHW(void* employeeOne, void* employeeTwo)
     return flag;
 }
 
+/** \brief Compara por salario
+ *
+ * \param employeeOne void* Direccion de un empleado
+ * \param employeeTwo void* Direccion de otro empleado
+ * \return int Devuelve -1, 0 o 1 de acuerdo al resultado de la comparacion
+ *
+ */
 int employee_compareBySalary(void* employeeOne, void* employeeTwo)
 {
     int flag = -1;
@@ -294,6 +435,12 @@ int employee_compareBySalary(void* employeeOne, void* employeeTwo)
     return flag;
 }
 
+/** \brief Obtiene y selecciona a un empleado de la lista como objetivo para realizar alguna accion
+ *
+ * \param this LinkedList* La lista
+ * \return Employee* Devuelve NULL si no se encontro al empleado, caso contrario la direccion del empleado
+ *
+ */
 Employee* employee_get(LinkedList* this)
 {
     Employee* rEmployee = NULL;
@@ -302,7 +449,7 @@ Employee* employee_get(LinkedList* this)
     controller_ListEmployee(this);
     getValidInt(&idToFind, "ID del empleado a modificar datos", 1, 5000, 0);
 
-    index = employee_verifyIfIsInList(this, idToFind);
+    index = employee_verifyIfIsInList(this, idToFind); ///Verifico si existe dicho empleado
     if(index != -1)
     {
         rEmployee = ll_get(this, index);
@@ -324,6 +471,12 @@ Employee* employee_get(LinkedList* this)
     return rEmployee;
 }
 
+/** \brief Modifica el nombre de un empleado
+ *
+ * \param oneEmployee Employee* La direccion de un empleado
+ * \return void
+ *
+ */
 void employee_modifyName(Employee* oneEmployee)
 {
     if(oneEmployee != NULL)
@@ -351,6 +504,12 @@ void employee_modifyName(Employee* oneEmployee)
     }
 }
 
+/** \brief Modifica las horas trabajadas de un empleado
+ *
+ * \param oneEmployee Employee* La direccion de un empleado
+ * \return void
+ *
+ */
 void employee_modifyHW(Employee* oneEmployee)
 {
     if(oneEmployee != NULL)
@@ -378,6 +537,12 @@ void employee_modifyHW(Employee* oneEmployee)
     }
 }
 
+/** \brief Modifica el salario de un empleado
+ *
+ * \param oneEmployee Employee* La direccion de un empleado
+ * \return void
+ *
+ */
 void employee_modifySalary(Employee* oneEmployee)
 {
     if(oneEmployee != NULL)
@@ -405,6 +570,12 @@ void employee_modifySalary(Employee* oneEmployee)
     }
 }
 
+/** \brief Carga el ultimo id desde un archivo binario
+ *
+ * \param lastId int* La direccion donde se guardara el dato
+ * \return void
+ *
+ */
 void employee_loadLastId(int* lastId)
 {
     FILE* pFile = NULL;
@@ -418,6 +589,12 @@ void employee_loadLastId(int* lastId)
     }
 }
 
+/** \brief Carga el ultimo id desde un archivo binario
+ *
+ * \param lastId int* La direccion donde se guardara el dato
+ * \return void
+ *
+ */
 void employee_saveLastId(int* lastId)
 {
     FILE* pFile = NULL;

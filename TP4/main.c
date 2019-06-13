@@ -9,9 +9,8 @@
 
 int main()
 {
-    int option, lastId = 1001, employeesCounter = 0, flag = 0, stateAdd;
+    int option, lastId = 1001, employeesCounter = 0, flag = 0, stateAdd; ///lastId guarda el ultimo id
     LinkedList* employeesList = ll_newLinkedList();
-    ///employee_saveLastId(&lastId);
     do
     {
         employee_showMenu(&option, "  1. Cargar datos de empleados desde data.csv (modo texto).\n  2. Cargar datos de empleados desde dataB.csv (modo binario).\n  3. Alta de empleado.\n  4. Modificar datos de empleado.\n  5. Baja de empleado.\n  6. Listar empleados.\n  7. Ordenar empleados.\n  8. Guardar datos de empleados en data.csv (modo texto).\n  9. Guardar datos de empleados en dataB.csv (modo binario).\n 10. Salir.", 1, 10);
@@ -24,8 +23,8 @@ int main()
                 }
                 else
                 {
-                    flag = 1;
-                    employee_loadLastId(&lastId);
+                    flag = 1; ///Se cargaron empleados desde un archivo
+                    employee_loadLastId(&lastId); ///Cargo ultimo id
                 }
                 employeesCounter = ll_len(employeesList);
                 system("pause");
@@ -37,14 +36,14 @@ int main()
                 }
                 else
                 {
-                    flag = 1;
-                    employee_loadLastId(&lastId);
+                    flag = 1; ///Se cargaron empleados desde un archivo
+                    employee_loadLastId(&lastId); ///Cargo ultimo id
                 }
                 employeesCounter = ll_len(employeesList);
                 system("pause");
                 break;
             case 3:
-                if(flag == 1)
+                if(flag == 1) ///Si se cargaron empleados de un archivo, puedo dar de alta empleados
                 {
                     stateAdd = controller_addEmployee(employeesList, &lastId);
                     if(stateAdd == 0)
@@ -64,7 +63,7 @@ int main()
                 system("pause");
                 break;
             case 4:
-                if(employeesCounter > 0)
+                if(employeesCounter > 0) ///Si hay empleados cargados en el sistema
                 {
                     if(controller_editEmployee(employeesList) == 0)
                     {
@@ -79,7 +78,7 @@ int main()
                 }
                 break;
             case 5:
-                if(employeesCounter > 0)
+                if(employeesCounter > 0) ///Si hay empleados cargados en el sistema
                 {
                     if(controller_removeEmployee(employeesList) == 0)
                     {
@@ -94,7 +93,7 @@ int main()
                 system("pause");
                 break;
             case 6:
-                if(employeesCounter > 0)
+                if(employeesCounter > 0) ///Si hay empleados cargados en el sistema
                 {
                     if(controller_ListEmployee(employeesList) == 0)
                     {
@@ -108,7 +107,7 @@ int main()
                 system("pause");
                 break;
             case 7:
-                if(employeesCounter > 0)
+                if(employeesCounter > 0) ///Si hay empleados cargados en el sistema
                 {
                     if(controller_sortEmployee(employeesList) == 0)
                     {
@@ -122,7 +121,7 @@ int main()
                 }
                 break;
             case 8:
-                if(employeesCounter > 0)
+                if(employeesCounter > 0) ///Si hay empleados cargados en el sistema
                 {
                     if(controller_saveAsText("data.csv", employeesList) == 0)
                     {
@@ -130,7 +129,7 @@ int main()
                     }
                     else
                     {
-                        employee_saveLastId(&lastId);
+                        employee_saveLastId(&lastId); ///Guardo ultimo id
                     }
                 }
                 else
@@ -148,7 +147,7 @@ int main()
                     }
                     else
                     {
-                        employee_saveLastId(&lastId);
+                        employee_saveLastId(&lastId); ///Guardo ultimo id
                     }
                 }
                 else
