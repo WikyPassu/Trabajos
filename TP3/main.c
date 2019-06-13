@@ -5,27 +5,13 @@
 #include "Controller.h"
 #include "Employee.h"
 
-/***********************************************************************************
-    Menu:
-     1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).
-     2. Cargar los datos de los empleados desde el archivo data.csv (modo binario).
-     3. Alta de empleado
-     4. Modificar datos de empleado
-     5. Baja de empleado
-     6. Listar empleados
-     7. Ordenar empleados
-     8. Guardar los datos de los empleados en el archivo data.csv (modo texto).
-     9. Guardar los datos de los empleados en el archivo data.csv (modo binario).
-    10. Salir
-***********************************************************************************/
-
 ///Falta revisar todo, intentar separar librerias y comentar todo el codigo.
-///Falta hacer ID incremental. Contador de ID pasado al controller de addEmployee.
 
 int main()
 {
-    int option, employeesCounter = 0, flag = 0;
+    int option, lastId = 1001, employeesCounter = 0, flag = 0, stateAdd;
     LinkedList* employeesList = ll_newLinkedList();
+    ///employee_saveLastId(&lastId);
     do
     {
         employee_showMenu(&option, "  1. Cargar datos de empleados desde data.csv (modo texto).\n  2. Cargar datos de empleados desde dataB.csv (modo binario).\n  3. Alta de empleado.\n  4. Modificar datos de empleado.\n  5. Baja de empleado.\n  6. Listar empleados.\n  7. Ordenar empleados.\n  8. Guardar datos de empleados en data.csv (modo texto).\n  9. Guardar datos de empleados en dataB.csv (modo binario).\n 10. Salir.", 1, 10);
@@ -39,6 +25,7 @@ int main()
                 else
                 {
                     flag = 1;
+                    employee_loadLastId(&lastId);
                 }
                 employeesCounter = ll_len(employeesList);
                 system("pause");
@@ -51,6 +38,7 @@ int main()
                 else
                 {
                     flag = 1;
+                    employee_loadLastId(&lastId);
                 }
                 employeesCounter = ll_len(employeesList);
                 system("pause");
@@ -58,9 +46,14 @@ int main()
             case 3:
                 if(flag == 1)
                 {
-                    if(controller_addEmployee(employeesList) == 0)
+                    stateAdd = controller_addEmployee(employeesList, &lastId);
+                    if(stateAdd == 0)
                     {
                         printf("Error: No se pudo realizar la carga de un empleado al sistema.\n\n");
+                    }
+                    else if(stateAdd == 1)
+                    {
+                        lastId++;
                     }
                     employeesCounter = ll_len(employeesList);
                 }
@@ -76,6 +69,7 @@ int main()
                     if(controller_editEmployee(employeesList) == 0)
                     {
                         printf("Error: No se pudo ingresar al menu de modificaciones.\n\n");
+                        system("pause");
                     }
                 }
                 else
@@ -102,8 +96,10 @@ int main()
             case 6:
                 if(employeesCounter > 0)
                 {
-                    printf("Empleados en el sistema: %d\n\n", employeesCounter);
-                    controller_ListEmployee(employeesList);
+                    if(controller_ListEmployee(employeesList) == 0)
+                    {
+                        printf("Error: No se pudo mostrar la lista de empleados.\n\n");
+                    }
                 }
                 else
                 {
@@ -132,6 +128,10 @@ int main()
                     {
                         printf("Error: No se pudo crear el archivo en formato texto.\n\n");
                     }
+                    else
+                    {
+                        employee_saveLastId(&lastId);
+                    }
                 }
                 else
                 {
@@ -144,7 +144,11 @@ int main()
                 {
                     if(controller_saveAsBinary("dataB.csv", employeesList) == 0)
                     {
-                        printf("Error: No se pudo crear el archivo en formato texto.\n\n");
+                        printf("Error: No se pudo crear el archivo en formato binario.\n\n");
+                    }
+                    else
+                    {
+                        employee_saveLastId(&lastId);
                     }
                 }
                 else
@@ -162,5 +166,6 @@ int main()
                 break;
         }
     }while(option != 10);
+
     return 0;
 }

@@ -59,28 +59,25 @@ int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
  * \return int
  *
  */
-int controller_addEmployee(LinkedList* pArrayListEmployee)
+int controller_addEmployee(LinkedList* pArrayListEmployee, int* lastId)
 {
-    int state = 0, id, hoursWorked, salary;
+    int state = 0, hoursWorked, salary;
     char name[51];
 
     if(pArrayListEmployee != NULL)
     {
         printf("Ingresando datos del empleado...\n\n");
-        //id = getRandomNumber(1001, 5000, 1);
-        employee_loadLastId(&id);
         getValidString("nombre", name, 51, 0);
         getValidInt(&hoursWorked, "horas trabajadas", 1, 400, 0);
         getValidInt(&salary, "salario", 1, 200000, 0);
 
-        Employee* newEmployee = employee_newParameters(id, name, hoursWorked, salary);
+        Employee* newEmployee = employee_newParameters(*lastId, name, hoursWorked, salary);
         employee_printOneEmployee(newEmployee, 1);
 
         if(employee_verifyCompliance("'s' si desea dar de alta al empleado"))
         {
             ll_add(pArrayListEmployee, newEmployee);
             state = 1;
-            employee_saveLastId(&id);
             printf("\nSe dio de alta al empleado exitosamente.\n\n");
         }
         else
@@ -130,6 +127,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
                     system("pause");
                     break;
                 case 5:
+                    state = 1;
                     break;
             }
         }while(option != 5);
@@ -152,6 +150,7 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 
     if(pArrayListEmployee != NULL)
     {
+        printf("Empleados en el sistema: %d\n\n", ll_len(pArrayListEmployee));
         printf("Mostrando lista de empleados...\n\n");
         Sleep(800);
         printf("--------------------------------------\n");
@@ -159,10 +158,10 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
         printf("\n--------------------------------------\n");
         for(i=0; i<ll_len(pArrayListEmployee); i++)
         {
-            /*if(i%250 == 0)
+            if(i%250 == 0)
             {
                 system("pause");
-            }*/
+            }
             oneEmployee = ll_get(pArrayListEmployee, i);
             employee_printOneEmployee(oneEmployee, 0);
         }
@@ -239,50 +238,98 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
             {
                 case 1:
                     printf("Ordenando empleados por legajo (ascendente), aguarde un momento...\n\n");
-                    ll_sort(pArrayListEmployee, employee_compareById, 1);
-                    printf("Empleados ordenados por legajo exitosamente.\n\n");
+                    if(ll_sort(pArrayListEmployee, employee_compareById, 1) == 0)
+                    {
+                        printf("Empleados ordenados por legajo exitosamente.\n\n");
+                    }
+                    else
+                    {
+                        printf("Error: No se pudo realizar el ordenamiento.\n\n");
+                    }
                     system("pause");
                     break;
                 case 2:
                     printf("Ordenando empleados por legajo (descendente), aguarde un momento...\n\n");
-                    ll_sort(pArrayListEmployee, employee_compareById, 0);
-                    printf("Empleados ordenados por legajo exitosamente.\n\n");
+                    if(ll_sort(pArrayListEmployee, employee_compareById, 0) == 0)
+                    {
+                        printf("Empleados ordenados por legajo exitosamente.\n\n");
+                    }
+                    else
+                    {
+                        printf("Error: No se pudo realizar el ordenamiento.\n\n");
+                    }
                     system("pause");
                     break;
                 case 3:
                     printf("Ordenando empleados por nombre (ascendente), aguarde un momento...\n\n");
-                    ll_sort(pArrayListEmployee, employee_compareByName, 1);
-                    printf("Empleados ordenados por nombre exitosamente.\n\n");
+                    if(ll_sort(pArrayListEmployee, employee_compareByName, 1) == 0)
+                    {
+                        printf("Empleados ordenados por nombre exitosamente.\n\n");
+                    }
+                    else
+                    {
+                        printf("Error: No se pudo realizar el ordenamiento.\n\n");
+                    }
                     system("pause");
                     break;
                 case 4:
                     printf("Ordenando empleados por nombre (descendente), aguarde un momento...\n\n");
-                    ll_sort(pArrayListEmployee, employee_compareByName, 0);
-                    printf("Empleados ordenados por nombre exitosamente.\n\n");
+                    if(ll_sort(pArrayListEmployee, employee_compareByName, 0) == 0)
+                    {
+                        printf("Empleados ordenados por nombre exitosamente.\n\n");
+                    }
+                    else
+                    {
+                        printf("Error: No se pudo realizar el ordenamiento.\n\n");
+                    }
                     system("pause");
                     break;
                 case 5:
                     printf("Ordenando empleados por horas trabajadas (ascendente), aguarde un momento...\n\n");
-                    ll_sort(pArrayListEmployee, employee_compareByHW, 1);
-                    printf("Empleados ordenados por horas trabajadas exitosamente.\n\n");
+                    if(ll_sort(pArrayListEmployee, employee_compareByHW, 1) == 0)
+                    {
+                        printf("Empleados ordenados por horas trabajadas exitosamente.\n\n");
+                    }
+                    else
+                    {
+                        printf("Error: No se pudo realizar el ordenamiento.\n\n");
+                    }
                     system("pause");
                     break;
                 case 6:
                     printf("Ordenando empleados por horas trabajadas (descendente), aguarde un momento...\n\n");
-                    ll_sort(pArrayListEmployee, employee_compareByHW, 0);
-                    printf("Empleados ordenados por horas trabajadas exitosamente.\n\n");
+                    if(ll_sort(pArrayListEmployee, employee_compareByHW, 0) == 0)
+                    {
+                        printf("Empleados ordenados por horas trabajadas exitosamente.\n\n");
+                    }
+                    else
+                    {
+                        printf("Error: No se pudo realizar el ordenamiento.\n\n");
+                    }
                     system("pause");
                     break;
                 case 7:
                     printf("Ordenando empleados por salario (ascendente), aguarde un momento...\n\n");
-                    ll_sort(pArrayListEmployee, employee_compareBySalary, 1);
-                    printf("Empleados ordenados por salario exitosamente.\n\n");
+                    if(ll_sort(pArrayListEmployee, employee_compareBySalary, 1) == 0)
+                    {
+                        printf("Empleados ordenados por salario exitosamente.\n\n");
+                    }
+                    else
+                    {
+                        printf("Error: No se pudo realizar el ordenamiento.\n\n");
+                    }
                     system("pause");
                     break;
                 case 8:
                     printf("Ordenando empleados por salario (descendente), aguarde un momento...\n\n");
-                    ll_sort(pArrayListEmployee, employee_compareBySalary, 0);
-                    printf("Empleados ordenados por salario exitosamente.\n\n");
+                    if(ll_sort(pArrayListEmployee, employee_compareBySalary, 0) == 0)
+                    {
+                        printf("Empleados ordenados por salario exitosamente.\n\n");
+                    }
+                    else
+                    {
+                        printf("Error: No se pudo realizar el ordenamiento.\n\n");
+                    }
                     system("pause");
                     break;
                 case 9:
