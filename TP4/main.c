@@ -5,8 +5,6 @@
 #include "Controller.h"
 #include "Employee.h"
 
-///Falta revisar todo, intentar separar librerias y comentar todo el codigo.
-
 int main()
 {
     int option, lastId = 1001, employeesCounter = 0, flag = 0, stateAdd; ///lastId guarda el ultimo id

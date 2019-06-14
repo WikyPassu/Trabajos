@@ -31,7 +31,7 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
     return state;
 }
 
-/** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
+/** \brief Carga los datos de los empleados desde el archivo dataB.csv (modo binario).
  *
  * \param path char* Ruta del archivo
  * \param pArrayListEmployee LinkedList* Lista de empleados
@@ -329,6 +329,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
                     system("pause");
                     break;
                 case 9:
+                    state = 1;
                     break;
             }
         }while(option != 9);
