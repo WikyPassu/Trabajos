@@ -258,7 +258,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
                     break;
                 case 3:
                     printf("Ordenando empleados por nombre (ascendente), aguarde un momento...\n\n");
-                    if(ll_sort(pArrayListEmployee, employee_compareByName, 1) == 0)
+                    if(ll_sort(pArrayListEmployee, employee_compareByName, 1) == 1)
                     {
                         printf("Empleados ordenados por nombre exitosamente.\n\n");
                     }
@@ -351,7 +351,7 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
     FILE* pFile = fopen(path, "w");
     Employee* oneEmployee;
 
-    if(pFile != NULL)
+    if(pFile != NULL && pArrayListEmployee != NULL)
     {
         printf("Creando y escribiendo archivo (modo texto)...\n\n");
         Sleep(800);
@@ -383,7 +383,7 @@ int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
     FILE* pFile = fopen(path, "wb");
     Employee* oneEmployee;
 
-    if(pFile != NULL)
+    if(pFile != NULL && pArrayListEmployee != NULL)
     {
         printf("Creando y escribiendo archivo (modo binario)...\n\n");
         Sleep(800);
