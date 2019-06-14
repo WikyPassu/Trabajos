@@ -589,7 +589,7 @@ void employee_loadLastId(int* lastId)
     }
 }
 
-/** \brief Carga el ultimo id desde un archivo binario
+/** \brief Guarda el ultimo id en un archivo binario
  *
  * \param lastId int* La direccion donde se guardara el dato
  * \return void
