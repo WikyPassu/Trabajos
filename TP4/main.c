@@ -7,7 +7,7 @@
 
 int main()
 {
-    int option, lastId = 1001, employeesCounter = 0, flag = 0, stateAdd; ///lastId guarda el ultimo id
+    int option, lastId = 1001, flag = 0, stateAdd; ///lastId guarda el ultimo id
     LinkedList* employeesList = ll_newLinkedList();
     do
     {
@@ -24,7 +24,6 @@ int main()
                     flag = 1; ///Se cargaron empleados desde un archivo
                     employee_loadLastId(&lastId); ///Cargo ultimo id
                 }
-                employeesCounter = ll_len(employeesList);
                 system("pause");
                 break;
             case 2:
@@ -37,7 +36,6 @@ int main()
                     flag = 1; ///Se cargaron empleados desde un archivo
                     employee_loadLastId(&lastId); ///Cargo ultimo id
                 }
-                employeesCounter = ll_len(employeesList);
                 system("pause");
                 break;
             case 3:
@@ -52,7 +50,6 @@ int main()
                     {
                         lastId++;
                     }
-                    employeesCounter = ll_len(employeesList);
                 }
                 else
                 {
@@ -61,7 +58,7 @@ int main()
                 system("pause");
                 break;
             case 4:
-                if(employeesCounter > 0) ///Si hay empleados cargados en el sistema
+                if(ll_isEmpty(employeesList) == 0) ///Si hay empleados cargados en el sistema
                 {
                     if(controller_editEmployee(employeesList) == 0)
                     {
@@ -76,13 +73,12 @@ int main()
                 }
                 break;
             case 5:
-                if(employeesCounter > 0) ///Si hay empleados cargados en el sistema
+                if(ll_isEmpty(employeesList) == 0) ///Si hay empleados cargados en el sistema
                 {
                     if(controller_removeEmployee(employeesList) == 0)
                     {
                         printf("Error: No se pudo ingresar al menu de eliminacion.\n\n");
                     }
-                    employeesCounter = ll_len(employeesList);
                 }
                 else
                 {
@@ -91,7 +87,7 @@ int main()
                 system("pause");
                 break;
             case 6:
-                if(employeesCounter > 0) ///Si hay empleados cargados en el sistema
+                if(ll_isEmpty(employeesList) == 0) ///Si hay empleados cargados en el sistema
                 {
                     if(controller_ListEmployee(employeesList) == 0)
                     {
@@ -105,7 +101,7 @@ int main()
                 system("pause");
                 break;
             case 7:
-                if(employeesCounter > 0) ///Si hay empleados cargados en el sistema
+                if(ll_isEmpty(employeesList) == 0) ///Si hay empleados cargados en el sistema
                 {
                     if(controller_sortEmployee(employeesList) == 0)
                     {
@@ -119,7 +115,7 @@ int main()
                 }
                 break;
             case 8:
-                if(employeesCounter > 0) ///Si hay empleados cargados en el sistema
+                if(ll_isEmpty(employeesList) == 0) ///Si hay empleados cargados en el sistema
                 {
                     if(controller_saveAsText("data.csv", employeesList) == 0)
                     {
@@ -137,7 +133,7 @@ int main()
                 system("pause");
                 break;
             case 9:
-                if(employeesCounter > 0)
+                if(ll_isEmpty(employeesList) == 0)
                 {
                     if(controller_saveAsBinary("dataB.csv", employeesList) == 0)
                     {
